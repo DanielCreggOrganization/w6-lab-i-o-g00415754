@@ -3,23 +3,26 @@ package com.example.iolab;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class Ex6 {
     public static void main(String[] args) {
         String inputPath = "resources/input.txt";
 
-        // Reading and counting lines
+        // Reading and counting words
         try (Stream<String> lines = Files.lines(Paths.get(inputPath))) {
-            long lineCount = lines.count();
-            System.out.println("Number of lines: " + lineCount);
+            long wordCount = lines.flatMap(line->Arrays.stream(line.split("\\s+"))).count();
+            System.out.println("Number of words: " + wordCount);
         } catch (IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
         }
 
-        // Reading and processing each line
+        // counting lines that contain specific word
+        String specificword = "Java";
         try (Stream<String> lines = Files.lines(Paths.get(inputPath))) {
-            lines.forEach(line -> System.out.println("Line: " + line));
+            long count = lines.filter(line->line.contains(specificword)).count();
+            System.out.println("Number of lines that contain " + specificword  + ": " + count);
         } catch (IOException e) {
             System.err.println("Error processing file: " + e.getMessage());
         }

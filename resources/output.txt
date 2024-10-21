@@ -1,5 +1,3 @@
 INPUT.TXT goes HERE! 
-
 HELLO 
-
 ANOTHER line HERE 
