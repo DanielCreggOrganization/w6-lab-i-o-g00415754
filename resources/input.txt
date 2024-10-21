@@ -1,1 +1,20 @@
-Hello, Java I/O! This is a test file.
+Input.txt goes here!
+
+
+
+
+
+
+
+
+
+
+
+Hello
+
+
+
+
+another line here
+
+
