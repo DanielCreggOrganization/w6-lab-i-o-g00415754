@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Ex6 {
@@ -33,6 +36,14 @@ public class Ex6 {
                 .filter(line -> !line.trim().isEmpty())
                 .count();
             System.out.println("Non-empty lines: " + nonEmptyLines);
+        } catch (IOException e) {
+            System.err.println("Error processing file: " + e.getMessage());
+        }
+
+        //word frequency
+        try  (Stream<String> lines = Files.lines(Paths.get(inputPath))) {
+            Map<String, Long> wordFreq = lines.flatMap(line->Arrays.stream(line.split("\\s+"))).collect(Collectors.groupingBy(word -> word, Collectors.counting()));
+            wordFreq.entrySet().stream().sorted(Map.Entry.<String, Long>comparingByValue().reversed()).limit(5).forEach(entry->System.out.println(entry.getKey() + ": " + entry.getValue()));;
         } catch (IOException e) {
             System.err.println("Error processing file: " + e.getMessage());
         }
