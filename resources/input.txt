@@ -1,3 +1,1 @@
-Hello Java 
-Java Java
-Java
+hello this is input.txt
